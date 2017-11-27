@@ -1,21 +1,26 @@
 .tab-content
   #portfolio.tab-pane.active
     .container-fluid
-      .card.card-infinite-scroll
+      .card
         .card-header
           h4
 
         ul.user-stock-list
           .user-stock-content.user-stock-header
-            div Company (21)
-            div Investment
-            div Nos
-            div LBP
-            div ABP
-            div Total (%)
-            div Value
+            .companies
+              span Company
+              span &nbsp;&nbsp;(
+              span.count = @users_stocks.count
+              span )
+            .investment Investment (%)
+            .nos Nos
+            .lbp LBP
+            .abp ABP
+            .cp CP
+            .total Total (%)
+            .value Value
         ul#user-stocks.user-stock-list
-          = render partial: 'user_stocks_table'
+          = render partial: 'users_stocks_table', locals: { users_stocks: @users_stocks }
 
   #market.tab-pane
 

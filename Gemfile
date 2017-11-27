@@ -25,8 +25,11 @@ gem 'devise'
 # Cron Jobs
 gem 'whenever', :require => false
 
-# Misc
+# Data accumulation
 gem 'stock_quote'
+gem 'nokogiri'
+
+# Misc
 gem 'jbuilder', '~> 2.5'
 
 group :development do
@@ -38,7 +41,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
-  gem 'pry-rails'
+  # gem 'pry-rails'
 
   gem 'byebug'
 end

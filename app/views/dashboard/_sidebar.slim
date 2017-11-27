@@ -20,7 +20,14 @@ ul.nav.nav-tabs.nav-stacked
         button.close data-dismiss="modal" type="button"
           span &times;
         h4.modal-title Add Transaction
-      = simple_form_for '', url: '' do |f|
+      = simple_form_for :transaction, data: { remote: true, url: transactions_path} do |f|
         .modal-body
-          = f.input :name, label: false, placeholder: 'Name', input_html: { maxlength: 50, minlength: 3 }
-        .modal-footer = f.submit 'Submit', class: 'btn btn-sharp btn-gradient-green'
+          = f.input :stock_id, label: 'Company', placeholder: 'Company Name'
+          = f.input :quantity, label: 'Stocks', placeholder: 'Quantity'
+          = f.input :transacted_at, as: :string, label: 'Date', placeholder: 'mmm dd, yyyy'
+          = f.input :brokerage
+          = f.input :price_per_unit, label: 'Price'
+          = f.input :transaction_type, as: :select, collection: Transaction.transaction_types.keys.to_a
+          = f.input :is_brokerage_percentage
+          = f.input :is_brokerage_amount
+        .modal-footer = f.submit 'Submit', class: 'btn btn-success'

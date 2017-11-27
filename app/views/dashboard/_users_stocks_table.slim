@@ -1,0 +1,48 @@
+- if users_stocks.present?
+  - users_stocks.each do |users_stock|
+    - stock = users_stock.stock
+    - investment_percentage = ((users_stock.investment / @total_investment) * 100).truncate(1).to_f
+    li.user-stock-content data-id="#{users_stock.id}" class="#{'last' if users_stocks.last == users_stock}"
+      .company = stock.name
+      .investment
+        span.amount = users_stock.investment.floor
+        span &nbsp;&nbsp;(
+        span.percentage = investment_percentage
+        span %)
+      .nos = users_stock.quantity
+      .lbp = users_stock.last_buying_price.truncate(1).to_f
+      .abp = users_stock.average_buying_price.truncate(1).to_f
+      .bse-code.hidden = stock.bse_code
+      .cp
+      .total
+      .value
+
+  .spacer-md-30
+
+  li.user-stock-content.user-stock-footer
+    .total-avg Total / Avg
+    .investment
+      span.amount = @total_investment.floor
+      span &nbsp;&nbsp;(100%)
+    .nos = @total_shares
+    .lbp = @avg_lbp.truncate(1).to_f
+    .abp = @avg_abp.truncate(1).to_f
+    div
+    div
+    .total
+    .value
+
+li.user-stock-content.hidden data-id=""
+  .company
+  .investment
+    span.amount
+    span &nbsp;&nbsp;(
+    span.percentage
+    span %)
+  .nos
+  .lbp
+  .abp
+  .bse-code.hidden
+  .cp
+  .total
+  .value

@@ -10,33 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127062618) do
+ActiveRecord::Schema.define(version: 20171127069718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "stocks", force: :cascade do |t|
-    t.string "code"
     t.string "name"
+    t.string "bse_code"
+    t.string "symbol"
     t.decimal "last_buying_price", precision: 19, scale: 4
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "stock_id"
+    t.bigint "users_stock_id"
     t.integer "quantity"
     t.decimal "price_per_unit"
     t.date "transacted_at"
-    t.integer "transaction_type"
+    t.integer "transaction_type", default: 0
     t.decimal "brokerage"
     t.boolean "is_brokerage_percentage"
     t.boolean "is_brokerage_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stock_id"], name: "index_transactions_on_stock_id"
-    t.index ["user_id"], name: "index_transactions_on_user_id"
+    t.index ["users_stock_id"], name: "index_transactions_on_users_stock_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -61,17 +60,17 @@ ActiveRecord::Schema.define(version: 20171127062618) do
   create_table "users_stocks", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "stock_id"
-    t.decimal "investment", precision: 19, scale: 4
     t.integer "quantity"
     t.decimal "last_buying_price", precision: 19, scale: 4
+    t.decimal "average_buying_price", precision: 19, scale: 4
+    t.decimal "investment", precision: 19, scale: 4
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["stock_id"], name: "index_users_stocks_on_stock_id"
     t.index ["user_id"], name: "index_users_stocks_on_user_id"
   end
 
-  add_foreign_key "transactions", "stocks"
-  add_foreign_key "transactions", "users"
+  add_foreign_key "transactions", "users_stocks"
   add_foreign_key "users_stocks", "stocks"
   add_foreign_key "users_stocks", "users"
 end
