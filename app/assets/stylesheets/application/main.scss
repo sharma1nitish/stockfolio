@@ -1,0 +1,9 @@
+body {
+  @include gradient($blue, $blue-dark, 75);
+
+  font-size: 17px;
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  stock: one
+  investment: 9.99
+  quantity: 1
+  last_buying_price: 9.99
+
+two:
+  user: two
+  stock: two
+  investment: 9.99
+  quantity: 1
+  last_buying_price: 9.99

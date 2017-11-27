@@ -1,0 +1,15 @@
+- content_for :stylesheets do
+  = stylesheet_link_tag 'two_columns', media: 'all', 'data-turbolinks-track' => true
+
+- content_for :javascripts do
+  = javascript_include_tag 'two_columns', 'data-turbolinks-track' => true
+
+- content_for :content do
+  = render 'layouts/two_columns_header'
+  #two-columns-content
+    .sidebar
+      = content_for?(:sidebar) ? yield(:sidebar) : render(partial: 'dashboard/sidebar')
+    .content
+      = yield
+
+= render template: 'layouts/base'

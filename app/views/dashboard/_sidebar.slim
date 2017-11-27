@@ -1,0 +1,26 @@
+ul.nav.nav-tabs.nav-stacked
+  li.active
+    = link_to '#portfolio', data: { toggle: 'tab' } do
+      = fa_icon 'list', class: 'element-spacer-right-5'
+      span Portfolio
+      = fa_icon 'plus-circle', class: 'pull-right', data: { modal: '#add-transaction-modal' }
+  li
+    = link_to '#market', data: { toggle: 'tab' } do
+      = fa_icon 'bar-chart', class: 'element-spacer-right-5'
+      span Market
+  li
+    = link_to '#trends', data: { toggle: 'tab' }
+      = fa_icon 'globe', class: 'element-spacer-right-5'
+      span Trends
+
+#add-transaction-modal.modal.fade role="dialog" tabindex="-1"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button"
+          span &times;
+        h4.modal-title Add Transaction
+      = simple_form_for '', url: '' do |f|
+        .modal-body
+          = f.input :name, label: false, placeholder: 'Name', input_html: { maxlength: 50, minlength: 3 }
+        .modal-footer = f.submit 'Submit', class: 'btn btn-sharp btn-gradient-green'

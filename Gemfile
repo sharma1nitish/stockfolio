@@ -13,12 +13,20 @@ gem 'slim-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
+gem 'jquery-rails'
+gem 'bootstrap-sass'
+gem 'simple_form'
+gem 'font-awesome-rails'
+gem 'select2-rails'
 
 # Auth
 gem 'devise'
 
+# Cron Jobs
+gem 'whenever', :require => false
+
 # Misc
-gem 'httparty'
+gem 'stock_quote'
 gem 'jbuilder', '~> 2.5'
 
 group :development do
@@ -29,6 +37,8 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry'
+  gem 'pry-rails'
 
   gem 'byebug'
 end

@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title
+      | StockFolio
+      = " | #{yield(:title)}" if content_for?(:title)
+
+    = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:300,400'
+    = yield :stylesheets
+
+    = csrf_meta_tags
+    = yield :meta
+
+  body
+    - if content_for?(:content)
+      = yield :content
+    - else
+      = yield
+
+    = yield :javascripts
+

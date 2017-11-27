@@ -1,0 +1,11 @@
+header
+  nav.navbar.navbar-default
+    .navbar-header
+      = link_to root_path, class: 'navbar-brand' do
+        .text-center
+          = fa_icon 'line-chart', class: 'element-spacer-right-5 text-inline '
+          h4.text-inline StockFolio
+
+    #header-collapse.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        = render 'layouts/header_links'

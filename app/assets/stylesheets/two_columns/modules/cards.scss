@@ -1,0 +1,33 @@
+.card {
+  @include box-shadow-elipse($box-shadow, 0 0 60px rgba($black, 0.5));
+
+  background-color: $white;
+  margin-top: 25px;
+  padding: 15px;
+
+  .card-header {
+    background-color: $grey-background;
+    margin: -15px -15px 10px -15px;
+    padding: 15px;
+
+    h4, h5 {
+      margin-bottom: 0;
+    }
+
+    h4 {
+      font-size: 24px;
+    }
+
+    h5 {
+      font-size: 16px;
+    }
+
+    .fa {
+      font-size: 18px;
+    }
+
+    .hover-element {
+      line-height: 12px;
+    }
+  }
+}

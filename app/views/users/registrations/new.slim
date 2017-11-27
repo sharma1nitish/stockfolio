@@ -1,0 +1,10 @@
+- content_for :title, 'Sign Up'
+
+h2 Signup
+= simple_form_for resource, as: resource_name, url: user_registration_path do |f|
+  = f.input :first_name, label: false, placeholder: 'First Name'
+  = f.input :last_name, label: false, placeholder: 'Last Name'
+  = f.input :email, label: false, placeholder: 'Email'
+  = f.input :password, label: false, placeholder: 'Password'
+  = f.input :password_confirmation, label: false, placeholder: 'Confirm Password'
+  = f.submit 'Submit', class: 'btn btn-success'

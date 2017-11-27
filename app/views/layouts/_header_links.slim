@@ -1,0 +1,7 @@
+li = link_to 'Home', root_path
+- if current_user.present?
+  li = link_to 'Dashboard', dashboard_path
+  li = link_to 'Logout', destroy_user_session_path, method: :delete
+- else
+  li = link_to 'Signup', new_user_registration_path
+  li = link_to 'Login', new_user_session_path

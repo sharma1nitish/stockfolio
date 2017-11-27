@@ -1,0 +1,33 @@
+body {
+  background-color: $white-smoke;
+}
+
+.sidebar, .content, header {
+  position: fixed;
+}
+
+.sidebar, .content {
+  margin-top: $two-columns-header-height;
+  overflow: auto;
+}
+
+.sidebar {
+  @include size($sidebar-width, calc(100% - #{$two-columns-header-height}));
+  @include box-shadow($box-shadow);
+
+  background-color: $white;
+  left: 0;
+  z-index: 4;
+}
+
+.content {
+  @include size(calc(100% - #{$sidebar-width}), calc(100% - #{$two-columns-header-height}));
+
+  margin-left: $sidebar-width;
+  z-index: 3;
+}
+
+header {
+  width: 100%;
+  z-index: 5;
+}

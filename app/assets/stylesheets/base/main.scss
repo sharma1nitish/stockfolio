@@ -1,0 +1,19 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  font-family: $lato;
+}
+
+body {
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+  ul {
+    list-style: none;
+  }
+}

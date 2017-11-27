@@ -1,0 +1,19 @@
+header.header
+  nav.navbar
+    .container
+      .navbar-header
+        button.navbar-toggle.collapsed aria-expanded="false" data-target="#header-collapse" data-toggle="collapse" type="button"
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+
+        .navbar-brand
+          = link_to root_path do
+            .text-center
+              = fa_icon 'line-chart', class: 'element-spacer-right-5 text-inline '
+              h4.text-inline StockFolio
+
+      #header-collapse.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          = render 'layouts/header_links'

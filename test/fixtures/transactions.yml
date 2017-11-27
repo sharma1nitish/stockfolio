@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  stock: one
+  quantity: 1
+  price_per_unit: 9.99
+  transacted_at: 2017-11-27
+  transaction_type: 1
+  brokerage: 9.99
+  is_brokerage_percentage: false
+  is_brokerage_amount: false
+
+two:
+  user: two
+  stock: two
+  quantity: 1
+  price_per_unit: 9.99
+  transacted_at: 2017-11-27
+  transaction_type: 1
+  brokerage: 9.99
+  is_brokerage_percentage: false
+  is_brokerage_amount: false

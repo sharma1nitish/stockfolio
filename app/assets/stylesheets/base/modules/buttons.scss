@@ -1,0 +1,9 @@
+.btn {
+  border: none;
+
+  &:focus, &:hover {
+    outline: none;
+    text-decoration: none;
+  }
+}
+

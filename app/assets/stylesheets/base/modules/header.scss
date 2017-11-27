@@ -1,0 +1,41 @@
+header {
+  font-size: 16px;
+
+  .navbar {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+}
+
+.header .navbar {
+  .navbar-nav {
+    padding: 5px 0;
+
+    li a {
+      color: $white;
+
+      &:hover {
+        color: $grey;
+        background-color: inherit;
+      }
+    }
+  }
+
+  .navbar-brand {
+    height: 50px;
+
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+
+      .fa {
+        font-size: 25px;
+        line-height: 20px;
+      }
+    }
+  }
+}

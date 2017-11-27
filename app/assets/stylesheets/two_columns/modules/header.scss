@@ -1,0 +1,21 @@
+header {
+  color: rgba($black, 0.8);
+  height: $two-columns-header-height;
+
+  .navbar {
+    background-color: $grey-background;
+
+    .navbar-brand {
+      @include size($sidebar-width, auto);
+
+      .fa {
+        font-size: 25px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .navbar-nav > li > a {
+    padding: 30px 15px;
+  }
+}

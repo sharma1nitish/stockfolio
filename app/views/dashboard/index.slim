@@ -1,0 +1,22 @@
+.tab-content
+  #portfolio.tab-pane.active
+    .container-fluid
+      .card.card-infinite-scroll
+        .card-header
+          h4
+
+        ul.user-stock-list
+          .user-stock-content.user-stock-header
+            div Company (21)
+            div Investment
+            div Nos
+            div LBP
+            div ABP
+            div Total (%)
+            div Value
+        ul#user-stocks.user-stock-list
+          = render partial: 'user_stocks_table'
+
+  #market.tab-pane
+
+  #trends.tab-pane

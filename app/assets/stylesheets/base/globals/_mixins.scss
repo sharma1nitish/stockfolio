@@ -1,0 +1,40 @@
+@mixin font($font, $weight) {
+  font-family: $font;
+  font-weight: $weight;
+}
+
+@mixin gradient($color1, $color2, $percentage) {
+  background-attachment: fixed;
+  background-color: $color1;
+  background-image:
+    radial-gradient(
+      circle at center bottom,
+      $color1,
+      $color2 $percentage * 1%
+    );
+}
+
+@mixin box-shadow-elipse($element-shadow, $after-element-shadow) {
+  @include box-shadow($element-shadow);
+  position: relative;
+
+  &:after {
+    @include box-shadow($after-element-shadow);
+    @include size(80%, 50%);
+
+    border-radius: 100%;
+    bottom: 0px;
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    z-index: -1;
+  }
+}
+
+@mixin text-capsule($bg-color, $text-color, $border-radius) {
+  background-color: $bg-color;
+  border: 1px solid $text-color;
+  border-radius: $border-radius;
+  color: $text-color;
+}

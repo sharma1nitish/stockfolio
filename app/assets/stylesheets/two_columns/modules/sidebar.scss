@@ -1,0 +1,58 @@
+.sidebar {
+  background-color: $blue;
+
+  .nav-tabs {
+    border: none;
+
+    li {
+      & > a:focus {
+        background-color: $blue-dark;
+      }
+
+      & > a, &.active > a {
+        color: $grey-smoke;
+        border: none;
+        border-right: 3px solid transparent;
+        border-radius: 0;
+        font-size: 16px;
+        margin-right: 0;
+      }
+
+      & > a:hover, &.active > a {
+        background-color: $blue-dark;
+        border-right: 3px solid $white-smoke;
+        color: $white-smoke;
+
+        .fa {
+          color: $white-smoke;
+        }
+      }
+
+      &, &:hover, &.active {
+        & > a .fa[data-modal="#add-project-modal"] {
+          color: $grey-smoke;
+          line-height: inherit;
+
+          &:hover {
+            color: #13e12c;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.fa {
+  font-size: 15px;
+  width: 20px;
+
+  &::before {
+    float: right;
+  }
+}
+
+span {
+  vertical-align: text-bottom;
+}
+

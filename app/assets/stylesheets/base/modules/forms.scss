@@ -1,0 +1,57 @@
+.box-form {
+  @include center-block;
+  $btn-height: 50px;
+
+  background-color: $white;
+  border-radius: 10px;
+  max-width: $box-form-width;
+  padding: 20px;
+
+  hr {
+    border-bottom: 0;
+    margin: 0;
+  }
+
+  h2, h3, h4 {
+    text-align: center;
+  }
+
+  .checkbox {
+    margin: 0;
+  }
+
+  .form-control {
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 400;
+    height: 60px;
+    margin: 20px 0;
+    padding: 20px;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .btn {
+    @include center-block;
+    @include size(200px, $btn-height);
+
+    font-size: 17px;
+    line-height: $btn-height - 15px;
+    margin: 20px auto;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .form-links {
+    font-size: 14px;
+
+    a {
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: underline;
+    }
+  }
+}
