@@ -18,9 +18,7 @@ $(function() {
       } else if (data.status == 'updated') {
         var $item = $('#user-stocks li[data-id="' + data.user_stock_id + '"]');
 
-        if (parseInt(data.quantity) == 0) $item.remove();
-
-        refreshUsersStockData($item, data)
+        parseInt(data.quantity) == 0 ? $item.remove() : refreshUsersStockData($item, data)
       }
 
       updateTotals(data);
