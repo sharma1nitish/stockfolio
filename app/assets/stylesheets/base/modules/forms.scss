@@ -66,22 +66,26 @@
   input {
     width: 100%;
   }
+
+  .select {
+    width: 100%;
+  }
 }
 
 .switch {
-  $switch-width: 35px;
+  $switch-width: 85px;
   $switch-input-height: 20px;
 
   font-size: 12px;
   padding-top: 30px;
   position: relative;
   height: 58px;
-  width: 100%;
+  width: $switch-width;
 
   label {
     color: $black;
     cursor: pointer;
-    font-size: 9px;
+    font-size: 12px;
     height: $switch-input-height;
     line-height: $switch-input-height;
     opacity: .33;
@@ -124,14 +128,15 @@
   }
 
   .toggle-outside {
-    height: $switch-input-height;
-    border-radius: 32px;
-    padding: 2px;
-    overflow: hidden;
-    transition: 0.25s ease all;
     background: $blue;
+    border-radius: 32px;
+    height: $switch-input-height;
+    margin-left: 2px;
+    overflow: hidden;
+    padding: 2px;
     position: absolute;
-    width: $switch-width;
+    transition: 0.25s ease all;
+    width: 35px;
   }
 
   .toggle-inside {
@@ -148,5 +153,10 @@
 
 .select2-container .select2-selection--single {
   height: 33px;
-  width: 130px;
+}
+
+@media(min-width: 768px) {
+  .modal-dialog {
+    width: 700px;
+  }
 }

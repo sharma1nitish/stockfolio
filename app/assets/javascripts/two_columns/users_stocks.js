@@ -12,38 +12,38 @@ $(function() {
       return $.ajax({
         type: 'GET',
         url: '/get_general_price?code=' + $(item).data('code'),
-      })
+      });
     })
 
     var itemsPromises = $.map($items, function(item) {
       return $.ajax({
         type: 'POST',
         url: '/get_current_price?users_stock_id=' + $(item).data('id') + '&bse_code=' + $(item).find('.bse-code').html(),
-      })
+      });
     })
 
     $.when.apply($, headerItemsPromises)
       .then(function() {
         $.each(arguments, function(index, value) {
-          refreshRealTimeData($($headerItems[index]), value[0])
+          refreshRealTimeData($($headerItems[index]), value[0]);
         });
       })
       .fail(function() {
-        console.log('Failed to refreshRealTimeData')
+        console.log('Failed to refreshRealTimeData');
       });
 
     $.when.apply($, itemsPromises)
       .then(function() {
         var currentTotalValue = sumValues(arguments)
         $.each(arguments, function(index, value) {
-          refreshUsersStockData($($items[index]), value[0], currentTotalValue)
+          refreshUsersStockData($($items[index]), value[0], currentTotalValue);
         });
       })
       .fail(function() {
-        console.log('Failed to refreshUsersStockData')
+        console.log('Failed to refreshUsersStockData');
       });
 
-    console.log('Refreshed')
+    console.log('Refreshed');
   }
 
   function refreshRealTimeData($item, data) {
@@ -53,8 +53,8 @@ $(function() {
   }
 
   function refreshUsersStockData($item, data, currentTotalValue) {
-    var $portfolio = $('.stock.total')
-    var $footer = $('.user-stock-footer')
+    var $portfolio = $('.stock.total');
+    var $footer = $('.user-stock-footer');
     var formattedCurrentTotalValue = formatNumber(currentTotalValue);
     var percentageChange = totalPercentageChange(currentTotalValue);
 
@@ -64,8 +64,8 @@ $(function() {
 
     refreshCaret($item, data.change_percentage);
 
-    $footer.find('.value').html(formattedCurrentTotalValue)
-    $footer.find('.total .amount').html(percentageChange)
+    $footer.find('.value').html(formattedCurrentTotalValue);
+    $footer.find('.total .amount').html(percentageChange);
 
     refreshCaret($footer, percentageChange);
 
@@ -87,7 +87,7 @@ $(function() {
     var sum = 0;
 
     $.each(arguments, function(index, value) {
-      sum += value[0].users_stock_value
+      sum += value[0].users_stock_value;
     });
 
     return sum;
@@ -95,11 +95,12 @@ $(function() {
 
   function totalPercentageChange(currentTotalValue) {
     var totalInvestment = $('.user-stock-footer .investment .amount').html().replace(/,/g, '');
-    return (((currentTotalValue / parseFloat(totalInvestment)) - 1) * 100).toFixed(1)
+    return (((currentTotalValue / parseFloat(totalInvestment)) - 1) * 100).toFixed(1);
   }
 
   function formatNumber(number) {
     if (number.toString().indexOf(',') > -1) return number;
+
     return Number(number).toLocaleString('en');
   }
 })

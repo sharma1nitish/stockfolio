@@ -11,7 +11,7 @@ $(function() {
       url: $form.data('url'),
       data: $form.serialize()
     }).done(function (data) {
-      $form[0].reset()
+      $form[0].reset();
 
       if (data.status == 'created') {
         addNewUsersStock(data);
@@ -23,7 +23,7 @@ $(function() {
         refreshUsersStockData($item, data)
       }
 
-      updateTotals(data)
+      updateTotals(data);
 
       jQuery.Deferred().done.apply(this, arguments);
     }).fail(function () {
@@ -32,6 +32,7 @@ $(function() {
   });
 
   $('#transaction_stock_id').select2({
+    width: '100%',
     minimumInputLength: 3,
     ajax: {
       url: '/get_stocks',
@@ -68,32 +69,32 @@ $(function() {
     var $item = $lastChild.clone();
     var $lastItem = $('li.last');
 
-    $item.attr('data-id', data.user_stock_id)
+    $item.attr('data-id', data.user_stock_id);
     $item.find('.company').html(data.name);
     $item.find('.bse-code').html(data.bse_code);
 
     refreshUsersStockData($item, data);
 
     if ($lastItem.length) {
-      $item.insertAfter($lastItem)
-      $lastItem.removeClass('last')
+      $item.insertAfter($lastItem);
+      $lastItem.removeClass('last');
     } else {
-      $item.prependTo($lastChild.parent())
+      $item.prependTo($lastChild.parent());
     }
 
-    $item.addClass('last')
-    $item.removeClass('hidden')
+    $item.addClass('last');
+    $item.removeClass('hidden');
   }
 
   function updateTotals(data) {
     var $header = $('.user-stock-header');
     var $footer = $('.user-stock-footer');
 
-    $header.find('.companies .count').html(data.company_count)
-    $footer.find('.investment .amount').html(data.total_investment)
-    $footer.find('.investment .percentage').html(data.investment_percentage)
-    $footer.find('.nos').html(data.total_quantity)
-    $footer.find('.lbp').html(data.avg_lbp)
-    $footer.find('.abp').html(data.avg_abp)
+    $header.find('.companies .count').html(data.company_count);
+    $footer.find('.investment .amount').html(data.total_investment);
+    $footer.find('.investment .percentage').html(data.investment_percentage);
+    $footer.find('.nos').html(data.total_quantity);
+    $footer.find('.lbp').html(data.avg_lbp);
+    $footer.find('.abp').html(data.avg_abp);
   }
 })
