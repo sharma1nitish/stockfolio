@@ -45,7 +45,7 @@ $(function() {
         return {
           results: $.map(data.stocks, function (item) {
             return {
-              text: item.name,
+              text: item.symbol,
               slug: item.bse_code,
               id: item.id
             }

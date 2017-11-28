@@ -5,12 +5,17 @@ class TransactionsController < ApplicationController
     current_users_stocks = current_user.users_stocks
     current_users_stock = current_users_stocks.where(stock_id: transaction_params[:stock_id]).first_or_initialize
 
-    status = :updated
+    if current_users_stock.inactive?
+      current_users_stock.active!
+      status = :created
+    else
+      status = :updated
+    end
 
     if !current_users_stock.persisted?
       current_users_stock.quantity = transaction_params[:quantity]
       current_users_stock.last_buying_price = transaction_params[:price_per_unit]
-      current_users_stock.active!
+      current_users_stock.status = :active
       current_users_stock.save!
       status = :created
     end
@@ -21,13 +26,15 @@ class TransactionsController < ApplicationController
 
     total_investment = current_users_stocks.pluck(:investment).inject(:+) || 0
     total_quantity = current_users_stocks.pluck(:quantity).inject(:+) || 0
-    avg_lbp = current_users_stocks.pluck(:last_buying_price).inject(:+) || 0
-    avg_abp = current_users_stocks.pluck(:average_buying_price).inject(:+) || 0
+    total_abp = current_users_stocks.pluck(:average_buying_price).inject(:+)
+    total_lbp = current_users_stocks.pluck(:last_buying_price).inject(:+)
+    avg_abp = total_abp.present? ? total_abp / current_users_stocks.count : 0
+    avg_lbp = total_lbp.present? ? total_lbp / current_users_stocks.count : 0
     investment_percentage = (current_users_stock.investment / total_investment) * 100
 
     render json: {
       user_stock_id: current_users_stock.id,
-      name: current_users_stock.stock.name,
+      name: current_users_stock.stock.symbol,
       investment: current_users_stock.investment.floor,
       investment_percentage: investment_percentage.truncate(1).to_f,
       quantity: current_users_stock.quantity,

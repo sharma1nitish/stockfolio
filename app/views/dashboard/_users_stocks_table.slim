@@ -3,7 +3,7 @@
     - stock = users_stock.stock
     - investment_percentage = ((users_stock.investment / @total_investment) * 100).truncate(1).to_f
     li.user-stock-content data-id="#{users_stock.id}" class="#{'last' if users_stocks.last == users_stock}"
-      .company = stock.name
+      .company = stock.symbol
       .investment
         span.amount = users_stock.investment.floor
         span &nbsp;&nbsp;(

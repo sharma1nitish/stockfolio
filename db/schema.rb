@@ -19,18 +19,18 @@ ActiveRecord::Schema.define(version: 20171127069718) do
     t.string "name"
     t.string "bse_code"
     t.string "symbol"
-    t.decimal "last_buying_price", precision: 19, scale: 4
+    t.decimal "last_buying_price", precision: 19, scale: 4, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
     t.bigint "users_stock_id"
-    t.integer "quantity"
-    t.decimal "price_per_unit"
+    t.integer "quantity", default: 0
+    t.decimal "price_per_unit", default: "0.0"
     t.date "transacted_at"
     t.integer "transaction_type", default: 0
-    t.decimal "brokerage"
+    t.decimal "brokerage", default: "0.0"
     t.boolean "is_brokerage_percentage"
     t.boolean "is_brokerage_amount"
     t.datetime "created_at", null: false
@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 20171127069718) do
   create_table "users_stocks", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "stock_id"
-    t.integer "quantity"
-    t.decimal "last_buying_price", precision: 19, scale: 4
-    t.decimal "average_buying_price", precision: 19, scale: 4
-    t.decimal "investment", precision: 19, scale: 4
+    t.integer "quantity", default: 0
+    t.decimal "last_buying_price", precision: 19, scale: 4, default: "0.0"
+    t.decimal "average_buying_price", precision: 19, scale: 4, default: "0.0"
+    t.decimal "investment", precision: 19, scale: 4, default: "0.0"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

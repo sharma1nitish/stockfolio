@@ -42,7 +42,6 @@ class Transaction < ApplicationRecord
   end
 
   def sale_is_not_more_than_purchase
-
     errors.add(:quantity, 'cannot exceed total quantity of stocks') if sell? && quantity > users_stock.quantity
   end
 end

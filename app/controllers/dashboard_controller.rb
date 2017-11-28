@@ -7,8 +7,10 @@ class DashboardController < ApplicationController
 
     @total_investment = @users_stocks.pluck(:investment).inject(:+) || 0
     @total_shares = @users_stocks.pluck(:quantity).inject(:+) || 0
-    @avg_lbp = @users_stocks.pluck(:last_buying_price).inject(:+) || 0
-    @avg_abp = @users_stocks.pluck(:average_buying_price).inject(:+) || 0
+    total_abp = @users_stocks.pluck(:average_buying_price).inject(:+)
+    total_lbp = @users_stocks.pluck(:last_buying_price).inject(:+)
+    @avg_abp = total_abp.present? ? total_abp / @users_stocks.count : 0
+    @avg_lbp = total_lbp.present? ? total_lbp / @users_stocks.count : 0
   end
 
   def get_stocks
