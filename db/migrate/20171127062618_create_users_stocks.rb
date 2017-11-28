@@ -7,6 +7,7 @@ class CreateUsersStocks < ActiveRecord::Migration[5.1]
       t.decimal :last_buying_price, precision: 19, scale: 4
       t.decimal :average_buying_price, precision: 19, scale: 4
       t.decimal :investment, precision: 19, scale: 4
+      t.integer :status, default: 0
 
       t.timestamps
     end

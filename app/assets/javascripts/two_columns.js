@@ -4,3 +4,4 @@
 //= require bootstrap-sprockets
 //= require_tree ./two_columns
 //= require turbolinks
+//= require select2

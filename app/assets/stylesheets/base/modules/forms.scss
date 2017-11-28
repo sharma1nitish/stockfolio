@@ -55,3 +55,98 @@
     }
   }
 }
+
+.form-inline .field {
+  padding-right: 0;
+
+  label {
+    display: block;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+.switch {
+  $switch-width: 35px;
+  $switch-input-height: 20px;
+
+  font-size: 12px;
+  padding-top: 30px;
+  position: relative;
+  height: 58px;
+  width: 100%;
+
+  label {
+    color: $black;
+    cursor: pointer;
+    font-size: 9px;
+    height: $switch-input-height;
+    line-height: $switch-input-height;
+    opacity: .33;
+    margin: 0;
+    margin-right: 2px;
+    transition: opacity .25s ease;
+  }
+
+  input {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    height: $switch-input-height;
+    width: $switch-width;
+    margin: 0;
+    margin-top: 30px;
+
+    &:checked {
+      z-index: 1;
+
+      + label {
+        opacity: 1;
+        cursor: default;
+      }
+
+      ~ .toggle-outside .toggle-inside {
+        left: 2px;
+      }
+    }
+
+    &:not(:checked) {
+      opacity: 0;
+    }
+
+    ~ input:checked ~ .toggle-outside .toggle-inside {
+      left: 17px;
+    }
+  }
+
+  .toggle-outside {
+    height: $switch-input-height;
+    border-radius: 32px;
+    padding: 2px;
+    overflow: hidden;
+    transition: 0.25s ease all;
+    background: $blue;
+    position: absolute;
+    width: $switch-width;
+  }
+
+  .toggle-inside {
+    $switch-height: 16px;
+
+    border-radius: 40px;
+    background: $white;
+    position: absolute;
+    transition: 0.25s ease all;
+    height: $switch-height;
+    width: $switch-height;
+  }
+}
+
+.select2-container .select2-selection--single {
+  height: 33px;
+  width: 130px;
+}

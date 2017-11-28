@@ -3,6 +3,7 @@ class Stock < ApplicationRecord
   has_many :users, through: :users_stocks
 
   validates :name, presence: true
+  validates :symbol, presence: true
   validates :bse_code, presence: true, uniqueness: true
   validates :last_buying_price, presence: true
 

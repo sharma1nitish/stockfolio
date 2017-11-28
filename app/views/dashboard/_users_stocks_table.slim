@@ -12,25 +12,25 @@
       .nos = users_stock.quantity
       .lbp = users_stock.last_buying_price.truncate(1).to_f
       .abp = users_stock.average_buying_price.truncate(1).to_f
-      .bse-code.hidden = stock.bse_code
       .cp
       .total
       .value
+      .bse-code.hidden = stock.bse_code
 
-  .spacer-md-30
+.spacer-md-30
 
-  li.user-stock-content.user-stock-footer
-    .total-avg Total / Avg
-    .investment
-      span.amount = @total_investment.floor
-      span &nbsp;&nbsp;(100%)
-    .nos = @total_shares
-    .lbp = @avg_lbp.truncate(1).to_f
-    .abp = @avg_abp.truncate(1).to_f
-    div
-    div
-    .total
-    .value
+li.user-stock-content.user-stock-footer
+  .total-avg Total / Avg
+  .investment
+    span.amount = @total_investment.floor
+    span &nbsp;&nbsp;(100%)
+  .nos = @total_shares
+  .lbp = @avg_lbp.truncate(1).to_f
+  .abp = @avg_abp.truncate(1).to_f
+  .cp
+  .total
+  .value
+  .bse-code
 
 li.user-stock-content.hidden data-id=""
   .company
@@ -42,7 +42,7 @@ li.user-stock-content.hidden data-id=""
   .nos
   .lbp
   .abp
-  .bse-code.hidden
   .cp
   .total
   .value
+  .bse-code.hidden

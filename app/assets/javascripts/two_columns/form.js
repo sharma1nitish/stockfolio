@@ -1,18 +1,24 @@
-$(function(){
+$(function() {
   var $form = $('form')
+
   $form.on('submit', function (event) {
     $form.parents('.modal').modal('hide');
+
     event.preventDefault();
-    ajaxdata = $.ajax({
+
+    $.ajax({
       type: 'POST',
       url: $form.data('url'),
       data: $form.serialize()
-    }).done(function (data) {debugger
+    }).done(function (data) {
+      $form[0].reset()
 
       if (data.status == 'created') {
         addNewUsersStock(data);
       } else if (data.status == 'updated') {
         var $item = $('#user-stocks li[data-id="' + data.user_stock_id + '"]');
+
+        if (parseInt(data.quantity) == 0) $item.remove();
 
         refreshUsersStockData($item, data)
       }
@@ -24,6 +30,30 @@ $(function(){
       jQuery.Deferred().fail.apply(this, arguments);
     });
   });
+
+  $('#transaction_stock_id').select2({
+    minimumInputLength: 3,
+    ajax: {
+      url: '/get_stocks',
+      dataType: 'json',
+      type: 'GET',
+      quietMillis: 50,
+      data: function (symbol) {
+        return { term: symbol };
+      },
+      processResults: function (data) {
+        return {
+          results: $.map(data.stocks, function (item) {
+            return {
+              text: item.name,
+              slug: item.bse_code,
+              id: item.id
+            }
+          })
+        };
+      }
+    }
+});
 
   function refreshUsersStockData($item, data) {
     $item.find('.investment .amount').html(data.investment);
@@ -48,7 +78,7 @@ $(function(){
       $item.insertAfter($lastItem)
       $lastItem.removeClass('last')
     } else {
-      $item.appendTo($lastChild.parent())
+      $item.prependTo($lastChild.parent())
     }
 
     $item.addClass('last')
@@ -59,7 +89,7 @@ $(function(){
     var $header = $('.user-stock-header');
     var $footer = $('.user-stock-footer');
 
-    $header.find('.companies count').html(data.company_count)
+    $header.find('.companies .count').html(data.company_count)
     $footer.find('.investment .amount').html(data.total_investment)
     $footer.find('.investment .percentage').html(data.investment_percentage)
     $footer.find('.nos').html(data.total_quantity)

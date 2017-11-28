@@ -13,21 +13,34 @@ ul.nav.nav-tabs.nav-stacked
       = fa_icon 'globe', class: 'element-spacer-right-5'
       span Trends
 
-#add-transaction-modal.modal.fade role="dialog" tabindex="-1"
+#add-transaction-modal.modal.fade role="dialog"
   .modal-dialog
     .modal-content
       .modal-header
         button.close data-dismiss="modal" type="button"
           span &times;
         h4.modal-title Add Transaction
-      = simple_form_for :transaction, data: { remote: true, url: transactions_path} do |f|
+      = simple_form_for :transaction, html: { class: 'form-inline' }, data: { remote: true, url: transactions_path} do |f|
         .modal-body
-          = f.input :stock_id, label: 'Company', placeholder: 'Company Name'
-          = f.input :quantity, label: 'Stocks', placeholder: 'Quantity'
-          = f.input :transacted_at, as: :string, label: 'Date', placeholder: 'mmm dd, yyyy'
-          = f.input :brokerage
-          = f.input :price_per_unit, label: 'Price'
-          = f.input :transaction_type, as: :select, collection: Transaction.transaction_types.keys.to_a
-          = f.input :is_brokerage_percentage
-          = f.input :is_brokerage_amount
+          .row
+            .col-md-3.field
+              = f.label :stock_id, 'Company'
+              = f.input :stock_id, as: :select, placeholder: 'Name', label: false, required: false
+            .col-md-2.field
+              = f.label :quantity, 'Stocks'
+              = f.input :quantity, placeholder: 'Quantity', label: false, required: false
+            .col-md-3.field
+              = f.label :transacted_at, 'Date'
+              = f.input :transacted_at, as: :string, placeholder: 'mmm dd, yyyy', label: false, required: false
+            .col-md-2.field
+              = f.label :price_per_unit, 'Price'
+              = f.input :price_per_unit, placeholder: 'Per Share', label: false, required: false
+            .col-md-2
+              .switch
+                = radio_button_tag :transaction_type, :buy, true, id: 'transaction_transaction_type_buy', name: 'transaction[transaction_type]'
+                label Buy
+                = radio_button_tag :transaction_type, :sell, false, id: 'transaction_transaction_type_sell', name: 'transaction[transaction_type]'
+                label.pull-right Sell
+                span.toggle-outside
+                  span.toggle-inside
         .modal-footer = f.submit 'Submit', class: 'btn btn-success'

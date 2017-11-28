@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20171127069718) do
     t.decimal "last_buying_price", precision: 19, scale: 4
     t.decimal "average_buying_price", precision: 19, scale: 4
     t.decimal "investment", precision: 19, scale: 4
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["stock_id"], name: "index_users_stocks_on_stock_id"

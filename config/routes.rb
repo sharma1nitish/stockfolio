@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   post 'get_current_price', to: 'dashboard#get_current_price'
+  get 'get_stocks', to: 'dashboard#get_stocks'
 
   resources :transactions, only: [:create]
 end
