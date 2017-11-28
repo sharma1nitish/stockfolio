@@ -1,5 +1,6 @@
 $(function() {
-  var $form = $('form')
+  var $form = $('form');
+  var $selectField = $('#transaction_stock_id');
 
   $form.on('submit', function (event) {
     $form.parents('.modal').modal('hide');
@@ -12,6 +13,7 @@ $(function() {
       data: $form.serialize()
     }).done(function (data) {
       $form[0].reset();
+      $selectField.select2("val", 0);
 
       if (data.status == 'created') {
         addNewUsersStock(data);
@@ -29,7 +31,7 @@ $(function() {
     });
   });
 
-  $('#transaction_stock_id').select2({
+  $selectField.select2({
     width: '100%',
     minimumInputLength: 3,
     ajax: {

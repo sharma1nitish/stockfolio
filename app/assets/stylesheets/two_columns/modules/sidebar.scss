@@ -10,10 +10,10 @@
       }
 
       & > a, &.active > a {
-        color: $grey-smoke;
         border: none;
         border-right: 3px solid transparent;
         border-radius: 0;
+        color: $grey-smoke;
         font-size: 16px;
         margin-right: 0;
       }
