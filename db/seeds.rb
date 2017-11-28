@@ -5,7 +5,7 @@ erroneous_codes_count = 0
 csv_text = File.read('./lib/list_of_scrips.csv')
 csv = CSV.parse(csv_text, headers: true)
 
-csv.to_a[1..10].each do |data|
+csv.to_a[1..-1].each do |data|
   begin
     last_buying_price = BigDecimal(StockQuote::Stock.quote("BOM:#{data[0]}").l)
     stock_attributes = { bse_code: data[0], name: data[2], symbol: data[1] }
