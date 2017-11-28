@@ -95,22 +95,22 @@
   }
 
   input {
-    position: absolute;
-    top: 0;
-    z-index: 2;
-    opacity: 0;
     cursor: pointer;
-    height: $switch-input-height;
-    width: $switch-width;
+    position: absolute;
     margin: 0;
     margin-top: 30px;
+    top: 0;
+    opacity: 0;
+    height: $switch-input-height;
+    width: $switch-width;
+    z-index: 2;
 
     &:checked {
       z-index: 1;
 
       + label {
-        opacity: 1;
         cursor: default;
+        opacity: 1;
       }
 
       ~ .toggle-outside .toggle-inside {
@@ -132,9 +132,9 @@
     border-radius: 32px;
     height: $switch-input-height;
     margin-left: 2px;
-    overflow: hidden;
     padding: 2px;
     position: absolute;
+    overflow: hidden;
     transition: 0.25s ease all;
     width: 35px;
   }
@@ -142,8 +142,8 @@
   .toggle-inside {
     $switch-height: 16px;
 
-    border-radius: 40px;
     background: $white;
+    border-radius: 40px;
     position: absolute;
     transition: 0.25s ease all;
     height: $switch-height;
