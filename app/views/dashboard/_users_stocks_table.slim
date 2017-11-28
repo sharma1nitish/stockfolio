@@ -5,15 +5,17 @@
     li.user-stock-content data-id="#{users_stock.id}" class="#{'last' if users_stocks.last == users_stock}"
       .company = stock.symbol
       .investment
-        span.amount = users_stock.investment.floor
+        span.amount = number_with_delimiter(users_stock.investment.floor, delimiter: ',')
         span &nbsp;&nbsp;(
         span.percentage = investment_percentage
         span %)
-      .nos = users_stock.quantity
-      .lbp = users_stock.last_buying_price.truncate(1).to_f
-      .abp = users_stock.average_buying_price.truncate(1).to_f
+      .nos = number_with_delimiter(users_stock.quantity, delimiter: ',')
+      .lbp = number_with_delimiter(users_stock.last_buying_price.truncate(1).to_f, delimiter: ',')
+      .abp = number_with_delimiter(users_stock.average_buying_price.truncate(1).to_f, delimiter: ',')
       .cp
       .total.change-direction
+        span.amount
+        span %
       .value
       .bse-code.hidden = stock.bse_code
 
@@ -22,13 +24,15 @@
 li.user-stock-content.user-stock-footer
   .total-avg Total / Avg
   .investment
-    span.amount = @total_investment.floor
+    span.amount = number_with_delimiter(@total_investment.floor, delimiter: ',')
     span &nbsp;&nbsp;(100%)
-  .nos = @total_shares
-  .lbp = @avg_lbp.truncate(1).to_f
-  .abp = @avg_abp.truncate(1).to_f
+  .nos = number_with_delimiter(@total_shares, delimiter: ',')
+  .lbp = number_with_delimiter(@avg_lbp.truncate(1).to_f, delimiter: ',')
+  .abp = number_with_delimiter(@avg_abp.truncate(1).to_f, delimiter: ',')
   .cp
   .total.change-direction
+    span.amount
+    span %
   .value
   .bse-code
 
@@ -44,5 +48,7 @@ li.user-stock-content.hidden data-id=""
   .abp
   .cp
   .total.change-direction
+    span.amount
+    span %
   .value
   .bse-code.hidden

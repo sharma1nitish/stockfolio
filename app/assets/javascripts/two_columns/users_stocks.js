@@ -1,5 +1,5 @@
 $(function() {
-  var REFRESH_TIMEOUT = 500;
+  var REFRESH_TIMEOUT = 1000;
 
   refresh();
   // setInterval(refresh, REFRESH_TIMEOUT);
@@ -47,27 +47,32 @@ $(function() {
   }
 
   function refreshRealTimeData($item, data) {
-    $item.find('.amount').html(data.current_price);
+    $item.find('.amount').html(formatNumber(data.current_price));
     $item.find('.change .percentage').html(data.change_percentage);
     refreshCaret($item, data.change_percentage);
   }
 
   function refreshUsersStockData($item, data, currentTotalValue) {
     var $portfolio = $('.stock.total')
+    var $footer = $('.user-stock-footer')
+    var formattedCurrentTotalValue = formatNumber(currentTotalValue);
+    var percentageChange = totalPercentageChange(currentTotalValue);
 
-    $item.find('.cp').html(data.current_price);
-    $item.find('.total').html(data.change_percentage);
+    $item.find('.cp').html(formatNumber(data.current_price));
+    $item.find('.total .amount').html(formatNumber(data.change_percentage));
     $item.find('.value').html(data.users_stock_value);
 
     refreshCaret($item, data.change_percentage);
 
-    $('.user-stock-footer .value').html(currentTotalValue)
-    $('.user-stock-footer .total').html(totalPercentageChange(currentTotalValue))
+    $footer.find('.value').html(formattedCurrentTotalValue)
+    $footer.find('.total .amount').html(percentageChange)
 
-    $portfolio.find('.amount').html(currentTotalValue);
-    $portfolio.find('.change .percentage').html(totalPercentageChange(currentTotalValue));
+    refreshCaret($footer, percentageChange);
 
-    refreshCaret($portfolio, totalPercentageChange(currentTotalValue));
+    $portfolio.find('.amount').html(formattedCurrentTotalValue);
+    $portfolio.find('.change .percentage').html(percentageChange);
+
+    refreshCaret($portfolio, percentageChange);
   }
 
   function refreshCaret($item, change_percentage) {
@@ -89,8 +94,13 @@ $(function() {
   }
 
   function totalPercentageChange(currentTotalValue) {
-    var totalInvestment = $('.user-stock-footer .investment .amount').html();
-    return ((currentTotalValue / (parseFloat(totalInvestment)) - 1) * 100).toFixed(1)
+    var totalInvestment = $('.user-stock-footer .investment .amount').html().replace(/,/g, '');
+    return (((currentTotalValue / parseFloat(totalInvestment)) - 1) * 100).toFixed(1)
+  }
+
+  function formatNumber(number) {
+    if (number.toString().indexOf(',')) return number;
+    return Number(number).toLocaleString('en');
   }
 })
 
