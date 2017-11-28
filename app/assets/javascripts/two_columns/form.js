@@ -13,7 +13,7 @@ $(function() {
       data: $form.serialize()
     }).done(function (data) {
       $form[0].reset();
-      $selectField.select2("val", 0);
+      $selectField.select2('val', 0);
 
       if (data.status == 'created') {
         addNewUsersStock(data);
@@ -27,6 +27,7 @@ $(function() {
 
       jQuery.Deferred().done.apply(this, arguments);
     }).fail(function () {
+      $selectField.select2('val', 0);
       jQuery.Deferred().fail.apply(this, arguments);
     });
   });

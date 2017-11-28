@@ -48,6 +48,8 @@ $(function() {
         .fail(function() {
           console.log('Failed to refreshUsersStockData');
         });
+    } else {
+      refreshPortfolioAndFooter(0, 0)
     }
 
 
@@ -61,8 +63,6 @@ $(function() {
   }
 
   function refreshUsersStockData($item, data, currentTotalValue) {
-    var $portfolio = $('.stock.total');
-    var $footer = $('.user-stock-footer');
     var formattedCurrentTotalValue = formatNumber(currentTotalValue);
     var percentageChange = totalPercentageChange(currentTotalValue);
 
@@ -71,6 +71,13 @@ $(function() {
     $item.find('.value').html(formatNumber(data.users_stock_value));
 
     refreshCaret($item, data.change_percentage);
+
+    refreshPortfolioAndFooter(formattedCurrentTotalValue, percentageChange)
+  }
+
+  function refreshPortfolioAndFooter(formattedCurrentTotalValue, percentageChange) {
+    var $portfolio = $('.stock.total');
+    var $footer = $('.user-stock-footer');
 
     $footer.find('.value').html(formattedCurrentTotalValue);
     $footer.find('.total .amount').html(percentageChange);
