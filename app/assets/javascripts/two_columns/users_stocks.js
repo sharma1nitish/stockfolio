@@ -60,7 +60,7 @@ $(function() {
 
     $item.find('.cp').html(formatNumber(data.current_price));
     $item.find('.total .amount').html(formatNumber(data.change_percentage));
-    $item.find('.value').html(data.users_stock_value);
+    $item.find('.value').html(formatNumber(data.users_stock_value));
 
     refreshCaret($item, data.change_percentage);
 
@@ -99,7 +99,7 @@ $(function() {
   }
 
   function formatNumber(number) {
-    if (number.toString().indexOf(',')) return number;
+    if (number.toString().indexOf(',') > -1) return number;
     return Number(number).toLocaleString('en');
   }
 })
