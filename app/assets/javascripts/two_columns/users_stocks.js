@@ -1,8 +1,8 @@
 $(function() {
-  var REFRESH_TIMEOUT = 1000;
+  var REFRESH_TIMEOUT = 5000;
 
   refresh();
-  // setInterval(refresh, REFRESH_TIMEOUT);
+  setInterval(refresh, REFRESH_TIMEOUT);
 
   function refresh() {
     var $headerItems = $('.card-header .stock[data-code="NIFTY"], .stock[data-code="SENSEX"]');
@@ -12,13 +12,6 @@ $(function() {
       return $.ajax({
         type: 'GET',
         url: '/get_general_price?code=' + $(item).data('code'),
-      });
-    })
-
-    var itemsPromises = $.map($items, function(item) {
-      return $.ajax({
-        type: 'POST',
-        url: '/get_current_price?users_stock_id=' + $(item).data('id') + '&bse_code=' + $(item).find('.bse-code').html(),
       });
     })
 
@@ -32,16 +25,31 @@ $(function() {
         console.log('Failed to refreshRealTimeData');
       });
 
-    $.when.apply($, itemsPromises)
-      .then(function() {
-        var currentTotalValue = sumValues(arguments)
-        $.each(arguments, function(index, value) {
-          refreshUsersStockData($($items[index]), value[0], currentTotalValue);
+    if ($items.length) {
+      var itemsPromises = $.map($items, function(item) {
+        return $.ajax({
+          type: 'POST',
+          url: '/get_current_price?users_stock_id=' + $(item).data('id') + '&bse_code=' + $(item).find('.bse-code').html(),
         });
       })
-      .fail(function() {
-        console.log('Failed to refreshUsersStockData');
-      });
+
+      $.when.apply($, itemsPromises)
+        .then(function() {
+          if ($.isArray(arguments[0])) {
+            var currentTotalValue = sumValues(arguments)
+
+            $.each(arguments, function(index, value) {
+              refreshUsersStockData($($items[index]), value[0], currentTotalValue);
+            });
+          } else {
+            refreshUsersStockData($($items), arguments[0], arguments[0].users_stock_value);
+          }
+        })
+        .fail(function() {
+          console.log('Failed to refreshUsersStockData');
+        });
+    }
+
 
     console.log('Refreshed');
   }
@@ -84,6 +92,8 @@ $(function() {
   }
 
   function sumValues(arguments) {
+    if (!$.isArray(arguments[0])) return arguments[0].users_stock_value;
+
     var sum = 0;
 
     $.each(arguments, function(index, value) {
