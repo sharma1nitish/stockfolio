@@ -50,10 +50,10 @@ $(function() {
               id: item.id
             }
           })
-        };
+        }
       }
     }
-});
+  });
 
   function refreshUsersStockData($item, data) {
     $item.find('.investment .amount').html(data.investment);

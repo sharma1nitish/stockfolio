@@ -3,7 +3,30 @@
     .container-fluid
       .card
         .card-header
-          h4
+          .stock.text-inline data-code="NIFTY"
+            .name.text-center Nifty
+            .value
+              .amount.text-inline.element-spacer-right-5
+              .change-direction.text-inline.element-spacer-right-5.up
+              .change.text-inline.element-spacer-right-5
+                span.percentage
+                span %
+          .stock.text-inline data-code="SENSEX"
+            .name.text-center SENSEX
+            .value
+              .amount.text-inline.element-spacer-right-5
+              .change-direction.text-inline.element-spacer-right-5.down
+              .change.text-inline.element-spacer-right-5
+                span.percentage
+                span %
+          .stock.text-inline.total
+            .name.text-center My Portfolio
+            .value
+              .amount.text-inline.element-spacer-right-5
+              .change-direction.text-inline.element-spacer-right-5.up
+              .change.text-inline.element-spacer-right-5
+                span.percentage
+                span %
 
         ul.user-stock-list
           .user-stock-content.user-stock-header

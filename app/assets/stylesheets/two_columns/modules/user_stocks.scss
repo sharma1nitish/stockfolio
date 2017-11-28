@@ -78,3 +78,15 @@
     }
   }
 }
+
+.change-direction {
+  &.up:before {
+    color: $green;
+    content: '▲'
+  }
+
+  &.down:before {
+    color: $red;
+    content: '▼'
+  }
+}

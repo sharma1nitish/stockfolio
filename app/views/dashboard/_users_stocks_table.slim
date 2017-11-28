@@ -13,7 +13,7 @@
       .lbp = users_stock.last_buying_price.truncate(1).to_f
       .abp = users_stock.average_buying_price.truncate(1).to_f
       .cp
-      .total
+      .total.change-direction
       .value
       .bse-code.hidden = stock.bse_code
 
@@ -28,7 +28,7 @@ li.user-stock-content.user-stock-footer
   .lbp = @avg_lbp.truncate(1).to_f
   .abp = @avg_abp.truncate(1).to_f
   .cp
-  .total
+  .total.change-direction
   .value
   .bse-code
 
@@ -43,6 +43,6 @@ li.user-stock-content.hidden data-id=""
   .lbp
   .abp
   .cp
-  .total
+  .total.change-direction
   .value
   .bse-code.hidden

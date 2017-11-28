@@ -31,8 +31,21 @@ class DashboardController < ApplicationController
 
     render json: {
       current_price: BigDecimal(current_price).truncate(1).to_f,
-      users_stock_change_percentage: change_percentage.truncate(1).to_f,
+      change_percentage: change_percentage.truncate(1).to_f,
       users_stock_value: value.truncate(1).to_f
+    }
+  end
+
+  def get_general_price
+    if params['code'].blank?
+      render(json: { message: 'Parameters missing' }) && return
+    end
+
+    stock_quote = StockQuote::Stock.quote(params['code'])
+
+    render json: {
+      current_price: stock_quote.l,
+      change_percentage: stock_quote.cp
     }
   end
 end
