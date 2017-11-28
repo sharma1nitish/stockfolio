@@ -1,5 +1,5 @@
 $(function() {
-  var REFRESH_TIMEOUT = 5000;
+  var REFRESH_TIMEOUT = 1000;
 
   refresh();
   setInterval(refresh, REFRESH_TIMEOUT);
