@@ -25,12 +25,12 @@ class DashboardController < ApplicationController
     users_stock = UsersStock.active.find(params['users_stock_id'])
     current_price = StockQuote::Stock.quote("BOM:#{params['bse_code']}").l
 
-    current_price_in_decimal = BigDecimal(current_price)
+    current_price_in_decimal = BigDecimal(current_price.gsub(',', ''))
     change_percentage = ((current_price_in_decimal / users_stock.last_buying_price) - 1) * 100
     value = users_stock.quantity * current_price_in_decimal
 
     render json: {
-      current_price: BigDecimal(current_price).truncate(1).to_f,
+      current_price: current_price_in_decimal.truncate(1).to_f,
       change_percentage: change_percentage.truncate(1).to_f,
       users_stock_value: value.truncate(1).to_f
     }

@@ -7,7 +7,7 @@ csv = CSV.parse(csv_text, headers: true)
 
 csv.to_a[1..-1].each do |data|
   begin
-    last_buying_price = BigDecimal(StockQuote::Stock.quote("BOM:#{data[0]}").l)
+    last_buying_price = BigDecimal(StockQuote::Stock.quote("BOM:#{data[0]}").l.gsub(',', ''))
     stock_attributes = { bse_code: data[0], name: data[2], symbol: data[1] }
     stock = Stock.where(stock_attributes).first_or_initialize
     stock.last_buying_price = last_buying_price
