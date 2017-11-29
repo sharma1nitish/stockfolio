@@ -6,6 +6,19 @@ header {
     border-radius: 0;
     margin-bottom: 0;
   }
+
+  .navbar-toggle {
+    border: 1px solid $white;
+    margin-top: 20px;
+
+    .icon-bar {
+      background: $white;
+    }
+  }
+
+  .navbar-right li {
+    text-align: center;
+  }
 }
 
 .header .navbar {

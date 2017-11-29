@@ -1,5 +1,11 @@
 header
   nav.navbar.navbar-default
+    button.navbar-toggle.collapsed aria-expanded="false" data-target="#header-collapse" data-toggle="collapse" type="button"
+      span.sr-only Toggle navigation
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+
     .navbar-header
       = link_to dashboard_path, class: 'navbar-brand' do
         .text-center
