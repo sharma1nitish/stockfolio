@@ -23,6 +23,10 @@ ul.nav.nav-tabs.nav-stacked
       = simple_form_for :transaction, html: { class: 'form-inline' }, data: { remote: true, url: transactions_path} do |f|
         .modal-body
           .row
+            .errors.hidden
+              span
+              .spacer-xs-20
+
             .col-md-3.field
               = f.label :stock_id, 'Company'
               = f.input :stock_id, as: :select, placeholder: 'Name', label: false, required: false

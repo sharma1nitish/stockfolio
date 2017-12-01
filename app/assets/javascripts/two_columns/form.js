@@ -1,10 +1,9 @@
 $(function() {
   var $form = $('form');
   var $selectField = $('#transaction_stock_id');
+  var $errors = $form.find('.errors');
 
   $form.on('submit', function (event) {
-    $form.parents('.modal').modal('hide');
-
     event.preventDefault();
 
     $.ajax({
@@ -12,6 +11,13 @@ $(function() {
       url: $form.data('url'),
       data: $form.serialize()
     }).done(function(data) {
+      $form.parents('.modal').modal('hide');
+
+      if (!$errors.hasClass('hidden')) {
+        $errors.addClass('hidden');
+        $errors.find('span').empty();
+      }
+
       $form[0].reset();
       $selectField.select2('val', 0);
 
@@ -26,8 +32,9 @@ $(function() {
       updateTotals(data);
 
       jQuery.Deferred().done.apply(this, arguments);
-    }).fail(function () {
-      $selectField.select2('val', 0);
+    }).fail(function (data) {
+      $errors.removeClass('hidden');
+      $errors.find('span').html(data.responseJSON.errors);
       jQuery.Deferred().fail.apply(this, arguments);
     });
   });

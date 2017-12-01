@@ -56,3 +56,7 @@ span {
   vertical-align: text-bottom;
 }
 
+#add-transaction-modal form .errors {
+  color: $red;
+  padding-left: 16px;
+}

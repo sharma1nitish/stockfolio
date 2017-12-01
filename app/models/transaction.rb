@@ -15,7 +15,7 @@ class Transaction < ApplicationRecord
   after_create :refresh_users_stock!
 
   def transaction_date_format
-    errors.add(:transacted_at, 'must be in the following format: mmm dd, yyyy') if transacted_at =~ /\A\w{3}\ \d{2}\, \d{4}\z/i
+    errors.add(:transacted_at, 'Date must be in the following format: mmm dd, yyyy') if transacted_at !~ /\A\w{3}\ \d{2}\, \d{4}\z/i
   end
 
   def investment
@@ -54,6 +54,9 @@ class Transaction < ApplicationRecord
   end
 
   def sale_is_not_more_than_purchase
-    errors.add(:quantity, 'cannot exceed total quantity of stocks') if sell? && quantity > users_stock.quantity
+    if sell?
+      errors.add(:transaction_type, 'Stock must be bought before selling') if users_stock.inactive?
+      errors.add(:quantity, 'Quantity cannot exceed total quantity of stocks') if quantity > users_stock.quantity
+    end
   end
 end
