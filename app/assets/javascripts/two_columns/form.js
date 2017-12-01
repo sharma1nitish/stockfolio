@@ -11,7 +11,7 @@ $(function() {
       type: 'POST',
       url: $form.data('url'),
       data: $form.serialize()
-    }).done(function (data) {
+    }).done(function(data) {
       $form[0].reset();
       $selectField.select2('val', 0);
 

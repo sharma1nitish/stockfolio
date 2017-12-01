@@ -57,26 +57,8 @@
   font-weight: 700;
 }
 
-#user-stock-detail-modal {
-  .modal-body {
-    padding: 15px 25px;
-  }
-
-  .table {
-    tr:first-child {
-      td, th {
-        border-top: 0;
-      }
-    }
-
-    td {
-      word-break: break-word;
-    }
-
-    th {
-      width: 25%;
-    }
-  }
+#user-stock-detail-modal .modal-body {
+  padding: 15px 25px;
 }
 
 .change-direction {

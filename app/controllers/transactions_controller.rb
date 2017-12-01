@@ -4,9 +4,9 @@ class TransactionsController < ApplicationController
   def create
     current_users_stocks = current_user.users_stocks
     current_users_stock = current_users_stocks.where(stock_id: transaction_params[:stock_id]).first_or_initialize
+    current_users_stock.transaction_type = transaction_params[:transaction_type]
 
-    if current_users_stock.inactive?
-      current_users_stock.active!
+    if current_users_stock.inactive? && current_users_stock.transaction_type = 'buy'
       status = :created
     else
       status = :updated
@@ -15,7 +15,6 @@ class TransactionsController < ApplicationController
     if !current_users_stock.persisted?
       current_users_stock.quantity = transaction_params[:quantity]
       current_users_stock.last_buying_price = transaction_params[:price_per_unit]
-      current_users_stock.status = :active
       current_users_stock.save!
       status = :created
     end

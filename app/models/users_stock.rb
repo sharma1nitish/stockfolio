@@ -16,10 +16,15 @@ class UsersStock < ApplicationRecord
   enum status: [:active, :inactive]
 
   before_validation :set_investment_and_average_buying_price, on: :create
+  before_validation :activate, on: :create
 
   def set_investment_and_average_buying_price
     self.investment = last_buying_price * quantity
     self.average_buying_price = last_buying_price
+  end
+
+  def activate
+    self.status = :active
   end
 
   def deactivate!

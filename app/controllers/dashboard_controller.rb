@@ -18,9 +18,7 @@ class DashboardController < ApplicationController
   end
 
   def get_current_price
-    if params['users_stock_id'].blank? && params['bse_code'].blank?
-      render(json: { message: 'Parameters missing' }) && return
-    end
+    render(json: { message: 'Parameters missing' }) && return if params['users_stock_id'].blank? && params['bse_code'].blank?
 
     users_stock = UsersStock.active.find(params['users_stock_id'])
     current_price = StockQuote::Stock.quote("BOM:#{params['bse_code']}").l
@@ -37,9 +35,7 @@ class DashboardController < ApplicationController
   end
 
   def get_general_price
-    if params['code'].blank?
-      render(json: { message: 'Parameters missing' }) && return
-    end
+    render(json: { message: 'Parameters missing' }) && return if params['code'].blank?
 
     stock_quote = StockQuote::Stock.quote(params['code'])
 

@@ -31,10 +31,3 @@
     z-index: -1;
   }
 }
-
-@mixin text-capsule($bg-color, $text-color, $border-radius) {
-  background-color: $bg-color;
-  border: 1px solid $text-color;
-  border-radius: $border-radius;
-  color: $text-color;
-}

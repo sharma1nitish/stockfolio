@@ -52,13 +52,13 @@ $(function() {
       refreshPortfolioAndFooter(0, 0)
     }
 
-
     console.log('Refreshed');
   }
 
   function refreshRealTimeData($item, data) {
     $item.find('.amount').html(formatNumber(data.current_price));
     $item.find('.change .percentage').html(data.change_percentage);
+
     refreshCaret($item, data.change_percentage);
   }
 
@@ -90,8 +90,8 @@ $(function() {
     refreshCaret($portfolio, percentageChange);
   }
 
-  function refreshCaret($item, change_percentage) {
-    if (parseFloat(change_percentage) < 0) {
+  function refreshCaret($item, changePercentage) {
+    if (parseFloat(changePercentage) < 0) {
       $item.find('.change-direction').addClass('down');
     } else {
       $item.find('.change-direction').addClass('up');
@@ -112,6 +112,7 @@ $(function() {
 
   function totalPercentageChange(currentTotalValue) {
     var totalInvestment = $('.user-stock-footer .investment .amount').html().replace(/,/g, '');
+
     return (((currentTotalValue / parseFloat(totalInvestment)) - 1) * 100).toFixed(1);
   }
 

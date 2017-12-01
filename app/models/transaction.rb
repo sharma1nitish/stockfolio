@@ -11,6 +11,7 @@ class Transaction < ApplicationRecord
 
   enum transaction_type: [:buy, :sell]
 
+  before_create :check_if_sale_transaction_for_inactive_users_stock
   after_create :refresh_users_stock!
 
   def transaction_date_format
@@ -44,6 +45,12 @@ class Transaction < ApplicationRecord
     users_stock.investment += change_in_investment
     users_stock.average_buying_price = users_stock.investment / users_stock.quantity
     users_stock.save!
+  end
+
+  def check_if_sale_transaction_for_inactive_users_stock
+    return if users_stock.active?
+
+    sell? ? errors.add(:transaction_type, 'Stock must be bought before selling') : users_stock.active!
   end
 
   def sale_is_not_more_than_purchase
