@@ -35,7 +35,7 @@ ul.nav.nav-tabs.nav-stacked
               = f.input :quantity, placeholder: 'Quantity', label: false, required: false
             .col-md-3.field
               = f.label :transacted_at, 'Date'
-              = f.input :transacted_at, as: :string, placeholder: 'mmm dd, yyyy', label: false, required: false
+              = f.input :transacted_at, as: :string, placeholder: 'mmm dd, yyyy', input_html: { class: 'date' }, label: false, required: false
             .col-md-2.field
               = f.label :price_per_unit, 'Price'
               = f.input :price_per_unit, placeholder: 'Per Share', label: false, required: false

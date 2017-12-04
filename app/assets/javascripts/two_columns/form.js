@@ -1,7 +1,9 @@
 $(function() {
   var $form = $('form');
+  var $submitButton = $('form').find('input[type="submit"]');
   var $selectField = $('#transaction_stock_id');
   var $errors = $form.find('.errors');
+  var dateRegex = new RegExp(/^[a-zA-Z]{3} \d{2}, \d{4}$/i);
 
   $form.on('submit', function (event) {
     event.preventDefault();
@@ -13,10 +15,7 @@ $(function() {
     }).done(function(data) {
       $form.parents('.modal').modal('hide');
 
-      if (!$errors.hasClass('hidden')) {
-        $errors.addClass('hidden');
-        $errors.find('span').empty();
-      }
+      hideErrors();
 
       $form[0].reset();
       $selectField.select2('val', 0);
@@ -33,10 +32,18 @@ $(function() {
 
       jQuery.Deferred().done.apply(this, arguments);
     }).fail(function (data) {
-      $errors.removeClass('hidden');
-      $errors.find('span').html(data.responseJSON.errors);
+      addErrors(data.responseJSON.errors);
+
       jQuery.Deferred().fail.apply(this, arguments);
     });
+  });
+
+  $form.find('input.date').on('change keyup', function() {
+    if (!dateRegex.test($(this).val())) {
+      addErrors('Date must be in the following format: mmm dd, yyyy');
+    } else {
+      hideErrors();
+    }
   });
 
   $selectField.select2({
@@ -63,6 +70,20 @@ $(function() {
       }
     }
   });
+
+  function hideErrors() {
+    if ($errors.hasClass('hidden')) return;
+
+    $errors.addClass('hidden');
+    $errors.find('span').empty();
+    $submitButton.attr('disabled', false);
+  }
+
+  function addErrors(message) {
+    $errors.removeClass('hidden');
+    $errors.find('span').html(message);
+    $submitButton.attr('disabled', true);
+  }
 
   function refreshUsersStockData($item, data) {
     $item.find('.investment .amount').html(data.investment);

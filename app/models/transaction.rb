@@ -4,19 +4,13 @@ class Transaction < ApplicationRecord
   validates :users_stock, presence: true
   validates :quantity, presence: true, numericality: { greater_than: 0 }
   validates :price_per_unit, presence: true, numericality: { greater_than: 0 }
-  # validates :transacted_at, format: { with: /\A\w{3}\ \d{2}\, \d{4}\z/i, message: 'must be in the following format: mmm dd, yyyy' }
   validates :transaction_type, presence: true
   validate :sale_is_not_more_than_purchase
-  validate :transaction_date_format
 
   enum transaction_type: [:buy, :sell]
 
   before_create :check_if_sale_transaction_for_inactive_users_stock
   after_create :refresh_users_stock!
-
-  def transaction_date_format
-    errors.add(:transacted_at, 'Date must be in the following format: mmm dd, yyyy') if transacted_at !~ /\A\w{3}\ \d{2}\, \d{4}\z/i
-  end
 
   def investment
     price_per_unit * quantity

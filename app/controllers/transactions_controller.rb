@@ -15,12 +15,16 @@ class TransactionsController < ApplicationController
     if !current_users_stock.persisted?
       current_users_stock.quantity = transaction_params[:quantity]
       current_users_stock.last_buying_price = transaction_params[:price_per_unit]
+      transaction = current_users_stock.transactions.build(transaction_params.except(:stock_id))
       current_users_stock.save
-      respond_with_errors_for(current_users_stock) && return if current_users_stock.errors.present?
-      status = :created
-    end
 
-    transaction = current_users_stock.transactions.create(transaction_params.except(:stock_id))
+      respond_with_errors_for(transaction) && return if transaction.errors.present?
+      respond_with_errors_for(current_users_stock) && return if current_users_stock.errors.present?
+
+      status = :created
+    else
+      transaction = current_users_stock.transactions.create(transaction_params.except(:stock_id))
+    end
 
     respond_with_errors_for(transaction) && return if transaction.errors.present?
 
